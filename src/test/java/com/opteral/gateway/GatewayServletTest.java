@@ -51,6 +51,14 @@ public class GatewayServletTest {
     }
 
     @Test
+    public void testWithEmptyJSONparameter() throws Exception {
+        parameters.put("json", "");
+        servlet.doPost(request, response);
+        assertThat(response_writer.toString(),
+                containsString("Error: A valid JSON request is required"));
+    }
+
+    @Test
     public void testOk() throws Exception {
         parameters.put("json", "this is not a valid JSON");
         servlet.doPost(request, response);

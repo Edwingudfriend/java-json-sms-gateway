@@ -34,6 +34,7 @@ public class GatewayServletTest {
         response = mock(HttpServletResponse.class);
         response_writer = new StringWriter();
 
+        when(request.getProtocol()).thenReturn("HTTP/1.1");
         when(request.getParameter(anyString())).thenAnswer(new Answer<String>() {
             public String answer(InvocationOnMock invocation) {
                 return parameters.get((String) invocation.getArguments()[0]);

@@ -16,7 +16,13 @@ public class GatewayServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        response.getWriter().print("Error: A valid JSON request is required");
+        String jsonString = request.getParameter("json");
+
+        if (jsonString != null && !jsonString.isEmpty())
+            response.getWriter().print("OK");
+        else
+            response.getWriter().print("Error: A valid JSON request is required");
+
 
     }
 }

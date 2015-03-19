@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.core.StringContains.containsString;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -46,16 +47,14 @@ public class GatewayServletTest {
     @Test
     public void testWithoutJSONparameter() throws Exception {
         servlet.doPost(request, response);
-        assertThat(response_writer.toString(),
-                containsString("Error: A valid JSON request is required"));
+        assertEquals(response_writer.toString(), "{\"response_code\":\"ERROR_GENERAL\",\"msg\":\"Error: A valid JSON request is required\"}");
     }
 
     @Test
     public void testWithEmptyJSONparameter() throws Exception {
         parameters.put("json", "");
         servlet.doPost(request, response);
-        assertThat(response_writer.toString(),
-                containsString("Error: A valid JSON request is required"));
+        assertEquals(response_writer.toString(), "{\"response_code\":\"ERROR_GENERAL\",\"msg\":\"Error: A valid JSON request is required\"}");
     }
 
     @Test

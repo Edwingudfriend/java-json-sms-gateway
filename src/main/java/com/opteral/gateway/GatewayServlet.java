@@ -1,5 +1,8 @@
 package com.opteral.gateway;
 
+import com.opteral.gateway.json.OutParser;
+import com.opteral.gateway.json.ResponseJSON;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,12 +19,18 @@ public class GatewayServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String jsonString = request.getParameter("json");
+        try
+        {
+            String jsonString = request.getParameter("json");
 
-        if (jsonString != null && !jsonString.isEmpty())
-            response.getWriter().print("OK");
-        else
-            response.getWriter().print("Error: A valid JSON request is required");
+            if (jsonString != null && !jsonString.isEmpty())
+                response.getWriter().print("OK");
+            else
+                throw new GatewayException("Error: A valid JSON request is required");
+        }
+        catch (Exception e) {
+            response.getWriter().print(OutParser.getJSON(new ResponseJSON(e)));
+        }
 
 
     }

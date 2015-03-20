@@ -4,10 +4,13 @@ package com.opteral.gateway.json;
 import com.opteral.gateway.GatewayException;
 import com.opteral.gateway.LoginException;
 
+import java.util.List;
+
 public class ResponseJSON {
 
     private ResponseCode response_code;
     private String msg;
+    private List<SMS_Response> sms_responses;
 
 
 
@@ -26,6 +29,10 @@ public class ResponseJSON {
         this.msg = loginException.getMessage();
     }
 
+    public ResponseJSON(ResponseCode responseCode) {
+        this.response_code = responseCode;
+    }
+
     public ResponseCode getResponse_code() {
         return response_code;
     }
@@ -40,6 +47,14 @@ public class ResponseJSON {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public List<SMS_Response> getSms_responses() {
+        return sms_responses;
+    }
+
+    public void setSms_responses(List<SMS_Response> sms_responses) {
+        this.sms_responses = sms_responses;
     }
 
     public enum ResponseCode {

@@ -9,6 +9,9 @@ public class InParser {
         RequestJSON requestJSON = null;
         try {
             requestJSON = GsonFactory.getGson().fromJson(requestJSONString, RequestJSON.class);
+
+            if (requestJSON.getSms_request() == null || requestJSON.getSms_request().size() == 0)
+                throw new GatewayException("Invalid JSON Request - sms requests are needed");
         } catch (JsonSyntaxException e) {
             throw new GatewayException("Invalid JSON Request");
         }

@@ -3,6 +3,7 @@ package com.opteral.gateway.json;
 import com.opteral.gateway.GatewayException;
 import com.opteral.gateway.TestHelper;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -81,5 +82,20 @@ public class InParserTest {
     }
 
 
+    @Test (expected = GatewayException.class)
+    public void withoutSMSObject() throws GatewayException {
+
+        String stringJSON_SMS = TestHelper.getFromFile("json/request_without_objects.json");
+
+        RequestJSON requestJSON = InParser.getRequestJSON(stringJSON_SMS);
+    }
+
+    @Test (expected = GatewayException.class)
+    public void withBabObjects() throws GatewayException {
+
+        String stringJSON_SMS = TestHelper.getFromFile("json/request_bad_objects.json");
+
+        RequestJSON requestJSON = InParser.getRequestJSON(stringJSON_SMS);
+    }
 
 }

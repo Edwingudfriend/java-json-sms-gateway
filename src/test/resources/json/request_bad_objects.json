@@ -1,0 +1,25 @@
+{ "user": "amalio",
+  "password": "secret",
+  "sms_request": [
+    {
+      "id": 0,
+      "msisdn": "34646974525",
+      "sender": "sender_str",
+      "text": "the text of SMS with an ñ",
+      "subid": "subid1",
+      "ack_url": "http://www.opteral.com/ack",
+      "datetime": "kjkj",
+      "test": false
+    },
+    {
+      "id": "dssd",
+      "msisdn": "34646974525",
+      "sender": "sender_str",
+      "text": "the text of SMS with an ñ",
+      "datetime": "2015-12-27 10:00",
+      "subid": "subid2",
+      "ack_url": "http://www.opteral.com/ack",
+      "test": false
+    }
+  ]
+}

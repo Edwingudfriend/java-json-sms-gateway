@@ -8,6 +8,7 @@ import com.opteral.gateway.json.ResponseJSON;
 import com.opteral.gateway.json.SMS_Response;
 import com.opteral.gateway.model.SMS;
 import com.opteral.gateway.model.User;
+import com.opteral.gateway.validation.CheckerSMS;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;

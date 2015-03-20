@@ -24,4 +24,16 @@ public class TestHelper {
 
         return result;
     }
+
+
+    public static String genString(int num) {
+
+        char aChar = 'a';
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < num; i++) {
+            sb.append(aChar);
+        }
+        return sb.toString();
+    }
 }

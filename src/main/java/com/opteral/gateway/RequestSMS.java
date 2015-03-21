@@ -1,6 +1,6 @@
 package com.opteral.gateway;
 
-import com.opteral.gateway.database.IAuth;
+import com.opteral.gateway.database.UserDAO;
 import com.opteral.gateway.database.SMSDAO;
 import com.opteral.gateway.json.JSON_SMS;
 import com.opteral.gateway.json.RequestJSON;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class RequestSMS {
 
-    private IAuth auth;
+    private UserDAO auth;
     private RequestJSON requestJSON;
     private ResponseJSON responseJSON;
     private CheckerSMS checkerSMS;
@@ -23,7 +23,7 @@ public class RequestSMS {
     private User user;
 
 
-    public RequestSMS(RequestJSON requestJSON, IAuth auth, SMSDAO smsdao, CheckerSMS checkerSMS) {
+    public RequestSMS(RequestJSON requestJSON, UserDAO auth, SMSDAO smsdao, CheckerSMS checkerSMS) {
 
         this.requestJSON = requestJSON;
         this.auth = auth;

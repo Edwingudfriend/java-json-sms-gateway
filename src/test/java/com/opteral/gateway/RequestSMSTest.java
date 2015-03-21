@@ -1,6 +1,6 @@
 package com.opteral.gateway;
 
-import com.opteral.gateway.database.IAuth;
+import com.opteral.gateway.database.UserDAO;
 import com.opteral.gateway.database.SMSDAO;
 import com.opteral.gateway.json.JSON_SMS;
 import com.opteral.gateway.json.RequestJSON;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.*;
 
 public class RequestSMSTest {
 
-    private IAuth auth;
+    private UserDAO auth;
     private SMSDAO smsdao;
     private CheckerSMS checkerSMS;
     private User user;
@@ -35,7 +35,7 @@ public class RequestSMSTest {
     @Before
     public void init()  {
 
-        auth = mock(IAuth.class);
+        auth = mock(UserDAO.class);
         smsdao = mock(SMSDAO.class);
         checkerSMS = mock(CheckerSMS.class);
 

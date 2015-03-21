@@ -2,9 +2,11 @@ package com.opteral.gateway.database;
 
 import com.opteral.gateway.GatewayException;
 import com.opteral.gateway.model.SMS;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.*;
 import java.util.Date;
+import java.util.List;
 
 public class SMSDAOMySQL extends Database implements SMSDAO {
 
@@ -20,6 +22,8 @@ public class SMSDAOMySQL extends Database implements SMSDAO {
 
 
     }
+
+
 
     private void guardar(SMS sms) throws GatewayException, SQLException {
 
@@ -144,6 +148,12 @@ public class SMSDAOMySQL extends Database implements SMSDAO {
             conn.setAutoCommit(true);
             closeQuietly(conn, statement, null);
         }
+    }
+
+
+    @Override
+    public List<SMS> getSMSForSend(java.sql.Date aFecha) throws GatewayException {
+        throw new NotImplementedException();
     }
     
 }

@@ -24,6 +24,7 @@ public class AbstractDbUnitTestCase {
 
 
     protected static UserDAOMySQL userDAO = new UserDAOMySQL();
+    protected static SMSDAOMySQL smsDAO = new SMSDAOMySQL();
 
     @BeforeClass
     public static void setupDatabase() throws Exception {
@@ -31,6 +32,7 @@ public class AbstractDbUnitTestCase {
         connection = DriverManager.getConnection("jdbc:hsqldb:mem:my-project-test;shutdown=true");
         dbunitConnection = new HsqldbConnection(connection,null);
         userDAO.setConnection(connection);
+        smsDAO.setConnection(connection);
         EntitiesHelper.createTestTables(connection);
     }
 

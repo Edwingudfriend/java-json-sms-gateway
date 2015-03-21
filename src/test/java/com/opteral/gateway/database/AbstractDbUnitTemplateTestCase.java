@@ -64,7 +64,7 @@ public class AbstractDbUnitTemplateTestCase extends AbstractDbUnitTestCase {
                 try {
                     IDataSet expectedDataSet = getReplacedDataSet(dataSetName, id );
                     IDataSet actualDataSet = dbunitConnection.createDataSet();
-                    Assertion.assertEqualsIgnoreCols(expectedDataSet, actualDataSet, "sms", new String[]{"fechaModificacion", "fechaLLegada", "id"});
+                    Assertion.assertEqualsIgnoreCols(expectedDataSet, actualDataSet, "sms", new String[]{"datetime_inbound", "datetime_lastmodified", "datetime_scheduled", "id"});
                 } catch (Exception e) {
                     throw new RuntimeException( "exception inserting dataset " + dataSetName, e );
                 }

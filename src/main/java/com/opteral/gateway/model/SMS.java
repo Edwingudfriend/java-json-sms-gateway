@@ -17,9 +17,8 @@ public class SMS {
     private String text;
     private String subid;
     private String ackurl;
-    private SMS_Status estadoSMS;
-    private SMS_Type sms_type;
-    private Date datetime;
+    private SMS_Status sms_status;
+    private Date datetimeScheduled;
     private boolean test;
 
 
@@ -87,28 +86,22 @@ public class SMS {
         this.ackurl = ackurl;
     }
 
-    public SMS_Status getEstadoSMS() {
-        return estadoSMS;
+    public SMS_Status getSms_status() {
+        return sms_status;
     }
 
-    public void setEstadoSMS(SMS_Status estadoSMS) {
-        this.estadoSMS = estadoSMS;
+    public void setSms_status(SMS_Status sms_status) {
+        this.sms_status = sms_status;
     }
 
-    public SMS_Type getSms_type() {
-        return sms_type;
+
+
+    public Date getDatetimeScheduled() {
+        return datetimeScheduled;
     }
 
-    public void setSms_type(SMS_Type sms_type) {
-        this.sms_type = sms_type;
-    }
-
-    public Date getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
+    public void setDatetimeScheduled(Date datetimeScheduled) {
+        this.datetimeScheduled = datetimeScheduled;
     }
 
     public boolean isTest() {
@@ -134,21 +127,17 @@ public class SMS {
         this.text = jsonSMS.getText();
         this.subid = jsonSMS.getSubid();
         this.ackurl = jsonSMS.getAck_url();
-        this.datetime = toSqlDate(jsonSMS.getDatetime());
+        this.datetimeScheduled = toSqlDate(jsonSMS.getDatetime());
         this.test = jsonSMS.isTest();
 
-        if (datetime != null)
-            sms_type = SMS_Type.DATED;
+        if (datetimeScheduled != null)
+            sms_status = SMS_Status.PROGRAMED;
         else
-            sms_type = SMS_Type.INSTANT;
+            sms_status = SMS_Status.ACCEPTD;
 
     }
 
-    public enum SMS_Type {
 
-        INSTANT,
-        DATED;
-    }
 
     public enum SMS_Status {
 

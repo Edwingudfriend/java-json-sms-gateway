@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<dataset>
+
+    <sms id="[ID]"
+         users_id = "456"
+         idSMSC = "[NULL]"
+         subid = "subid1"
+         msisdn = "34656987415"
+         sender = "sender"
+         text = "The text of message with an ñ"
+         status = "7"
+         datetime_inbound = "[create_date]"
+         datetime_lastmodified  = "[create_date]"
+         ackurl = "http://www.anurl.com/ack"
+         datetime_scheduled = "[NULL]"/>
+
+</dataset>

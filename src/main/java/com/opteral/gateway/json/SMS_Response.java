@@ -12,7 +12,7 @@ public class SMS_Response {
     public SMS_Response(SMS sms, boolean request_ok) {
 
         this.request_ok = request_ok;
-        this.status = sms.getEstadoSMS();
+        this.status = sms.getSms_status();
         this.id = sms.getId();
         this.subid = sms.getSubid();
 

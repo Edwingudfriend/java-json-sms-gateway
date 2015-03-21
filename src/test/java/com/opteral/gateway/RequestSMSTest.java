@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class RequestSMSTest {
     }
 
     @Test
-    public void requestSMSOk() throws GatewayException {
+    public void requestSMSOk() throws GatewayException, SQLException {
 
 
 
@@ -99,7 +100,7 @@ public class RequestSMSTest {
 
 
     @Test
-    public void OkWithDiscardedSMS() throws GatewayException {
+    public void OkWithDiscardedSMS() throws GatewayException, SQLException {
 
         when(auth.identify(anyString(), anyString())).thenReturn(user);
         doThrow(new GatewayException("msg")).when(smsdao).persist(any(SMS.class));

@@ -4,8 +4,10 @@ import com.opteral.gateway.GatewayException;
 import com.opteral.gateway.json.JSON_SMS;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import static com.opteral.gateway.database.DAOUtil.toSqlDate;
+import static com.opteral.gateway.database.DAOUtil.toSqlTimeStamp;
 
 public class SMS {
 
@@ -18,7 +20,7 @@ public class SMS {
     private String subid;
     private String ackurl;
     private SMS_Status sms_status;
-    private Date datetimeScheduled;
+    private Timestamp datetimeScheduled;
     private boolean test;
 
 
@@ -95,12 +97,11 @@ public class SMS {
     }
 
 
-
-    public Date getDatetimeScheduled() {
+    public Timestamp getDatetimeScheduled() {
         return datetimeScheduled;
     }
 
-    public void setDatetimeScheduled(Date datetimeScheduled) {
+    public void setDatetimeScheduled(Timestamp datetimeScheduled) {
         this.datetimeScheduled = datetimeScheduled;
     }
 
@@ -127,7 +128,7 @@ public class SMS {
         this.text = jsonSMS.getText();
         this.subid = jsonSMS.getSubid();
         this.ackurl = jsonSMS.getAck_url();
-        this.datetimeScheduled = toSqlDate(jsonSMS.getDatetime());
+        this.datetimeScheduled = toSqlTimeStamp(jsonSMS.getDatetime());
         this.test = jsonSMS.isTest();
 
         if (datetimeScheduled != null)

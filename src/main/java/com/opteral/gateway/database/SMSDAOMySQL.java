@@ -5,8 +5,11 @@ import com.opteral.gateway.model.SMS;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static com.opteral.gateway.database.DAOUtil.fillSMS;
 
 public class SMSDAOMySQL extends Database implements SMSDAO {
 
@@ -153,7 +156,50 @@ public class SMSDAOMySQL extends Database implements SMSDAO {
 
     @Override
     public List<SMS> getSMSForSend(java.sql.Date aFecha) throws GatewayException {
-        throw new NotImplementedException();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        ArrayList<SMS> listaSMS = new ArrayList<SMS>();
+
+        try {
+
+            setConnection();
+
+            String sql = "SELECT * FROM sms WHERE status < ? AND (datetime_scheduled <= ? OR datetime_scheduled is NULL )";
+
+            statement = conn.prepareStatement(sql);
+
+            statement.setInt(1, SMS.SMS_Status.ONSMSC.getValue());
+            statement.setDate(2, aFecha);
+
+            resultSet = statement.executeQuery();
+
+            if (!resultSet.isBeforeFirst() ) {
+
+                return listaSMS;
+            }
+
+
+            while (resultSet.next()) {
+
+                SMS sms = fillSMS(resultSet);
+
+                listaSMS.add(sms);
+
+
+            }
+
+            return listaSMS;
+
+
+        }
+        catch (Exception e) {
+            throw new GatewayException ("Error: Failed recovering sms for send");
+        }
+        finally
+        {
+            closeQuietly(conn, statement, resultSet);
+        }
     }
     
 }

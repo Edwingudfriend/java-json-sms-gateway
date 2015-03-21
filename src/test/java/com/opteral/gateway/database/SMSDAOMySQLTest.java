@@ -90,14 +90,14 @@ public class SMSDAOMySQLTest extends AbstractDbUnitTemplateTestCase {
         assertEquals(EntitiesHelper.SENDER, lista.get(1).getSender());
         assertEquals(EntitiesHelper.MSISDN, lista.get(0).getMsisdn());
         assertEquals(EntitiesHelper.MSISDN, lista.get(1).getMsisdn());
-        assertEquals(EntitiesHelper.MSISDN, lista.get(0).getText());
-        assertEquals(EntitiesHelper.MSISDN, lista.get(1).getText());
+        assertEquals(EntitiesHelper.TEXT, lista.get(0).getText());
+        assertEquals(EntitiesHelper.TEXT, lista.get(1).getText());
         assertEquals(EntitiesHelper.SUBID, lista.get(0).getSubid());
         assertEquals(EntitiesHelper.SUBID, lista.get(1).getSubid());
         assertEquals(EntitiesHelper.ACKURL, lista.get(0).getAckurl());
         assertEquals(EntitiesHelper.ACKURL, lista.get(1).getAckurl());
         assertEquals(null, lista.get(0).getDatetimeScheduled());
-        assertEquals(EntitiesHelper.DATETIME_SCHEDULED, lista.get(1).getDatetimeScheduled());
+        assertEquals(EntitiesHelper.DATETIME_SCHEDULED_2014, lista.get(1).getDatetimeScheduled());
 
 
 

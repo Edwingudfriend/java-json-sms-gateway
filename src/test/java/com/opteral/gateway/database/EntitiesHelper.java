@@ -4,10 +4,7 @@ import com.opteral.gateway.TestHelper;
 import com.opteral.gateway.model.SMS;
 import com.opteral.gateway.model.User;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,7 +19,8 @@ public class EntitiesHelper {
     public static final String TEXT = "The text of message with an ñ";
     public static final String SUBID = "subid1";
     public static final String ACKURL = "http://www.anurl.com/ack";
-    public static final Date DATETIME_SCHEDULED = new Date(1451208600000L);
+    public static final Timestamp DATETIME_SCHEDULED_2015 = new Timestamp(1451208600000L);
+    public static final Timestamp DATETIME_SCHEDULED_2014 = new Timestamp(1419672600000L);
 
 
     private EntitiesHelper() {
@@ -63,7 +61,7 @@ public class EntitiesHelper {
         sms.setText(TEXT);
         sms.setSubid(SUBID);
         sms.setAckurl(ACKURL);
-        sms.setDatetimeScheduled(DATETIME_SCHEDULED);
+        sms.setDatetimeScheduled(DATETIME_SCHEDULED_2015);
         sms.setTest(false);
 
         return sms;

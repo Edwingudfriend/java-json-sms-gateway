@@ -1,9 +1,7 @@
 package com.opteral.gateway;
 
 import com.opteral.gateway.database.SMSDAO;
-import com.opteral.gateway.database.UserDAO;
 import com.opteral.gateway.model.SMS;
-import com.opteral.gateway.model.User;
 import com.opteral.gateway.smsc.SMSC;
 import org.apache.log4j.Logger;
 
@@ -24,11 +22,11 @@ public class Sender {
         this.smsc = smsc;
     }
 
-    public void envia(java.sql.Date aFecha)  {
+    public void send(java.sql.Date aFecha)  {
 
         try {
 
-            procesaLista(smsdao.getSMSForSend(aFecha));
+            processList(smsdao.getSMSForSend(aFecha));
 
         }
         catch (Exception e) {
@@ -41,13 +39,13 @@ public class Sender {
 
 
 
-    private void procesaLista(List<SMS> lista)  {
+    private void processList(List<SMS> lista)  {
 
         for (SMS sms : lista) {
 
             try
             {
-                procesaSMS(sms);
+                processSMS(sms);
 
             } catch (Exception e) {
 
@@ -57,7 +55,7 @@ public class Sender {
         }
     }
 
-    private void procesaSMS(SMS sms) throws GatewayException, IOException, SQLException {
+    private void processSMS(SMS sms) throws GatewayException, IOException, SQLException {
 
         smsc.sendSMS(sms);
 

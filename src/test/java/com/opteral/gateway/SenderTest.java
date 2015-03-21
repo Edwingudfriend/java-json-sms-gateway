@@ -1,10 +1,7 @@
 package com.opteral.gateway;
 
-import com.opteral.gateway.database.EntitiesHelper;
 import com.opteral.gateway.database.SMSDAO;
-import com.opteral.gateway.database.UserDAO;
 import com.opteral.gateway.model.SMS;
-import com.opteral.gateway.model.User;
 import com.opteral.gateway.smsc.SMSC;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,7 +52,7 @@ public class SenderTest {
         smsList.get(0).setIdSMSC("1");
         smsList.get(1).setIdSMSC("2");
 
-        sender.envia(new Date(Instant.now().toEpochMilli()));
+        sender.send(new Date(Instant.now().toEpochMilli()));
 
         verify(smsc, times(1)).sendSMS(smsList.get(0));
         verify(smsc, times(1)).sendSMS(smsList.get(1));
@@ -73,7 +70,7 @@ public class SenderTest {
         smsList.get(0).setIdSMSC("1");
 
 
-        sender.envia(new Date(Instant.now().toEpochMilli()));
+        sender.send(new Date(Instant.now().toEpochMilli()));
 
         verify(smsc, times(1)).sendSMS(smsList.get(0));
 

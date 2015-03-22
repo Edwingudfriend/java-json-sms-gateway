@@ -3,4 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
+
+    <listener>
+        <listener-class>com.opteral.gateway.Config</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>Java Servlet Gateway</servlet-name>
+        <servlet-class>com.opteral.gateway.GatewayServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Java Servlet Gateway</servlet-name>
+        <url-pattern>/gateway</url-pattern>
+    </servlet-mapping>
+
 </web-app>

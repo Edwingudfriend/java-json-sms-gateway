@@ -77,7 +77,7 @@ public class Config implements ServletContextListener {
 
             session.addSessionStateListener(new SMSCSessionListener());
 
-            session.connectAndBind("87.222.102.191", 8056, new BindParameter(BindType.BIND_TRX, "pavel", "wpsd", "cp", TypeOfNumber.UNKNOWN, NumberingPlanIndicator.UNKNOWN, null));
+            session.connectAndBind("87.222.103.149", 8056, new BindParameter(BindType.BIND_TRX, "pavel", "wpsd", "cp", TypeOfNumber.UNKNOWN, NumberingPlanIndicator.UNKNOWN, null));
 
             iniciado.compareAndSet(false,true);
 

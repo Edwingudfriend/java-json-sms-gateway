@@ -22,7 +22,7 @@ public enum SingletonDataSource {
         try {
             initContext = new InitialContext();
 
-            this.dataSource = (DataSource) initContext.lookup("java:jboss/datasources/MysqlDS");
+            this.dataSource = (DataSource) initContext.lookup("java:jboss/datasources/jjsgDS");
         } catch (NamingException e) {
             throw new ExceptionInInitializerError();
         }

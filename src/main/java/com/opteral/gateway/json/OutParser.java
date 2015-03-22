@@ -11,7 +11,23 @@ public class OutParser {
         }
         catch (Exception e)
         {
-            return "Respuesta con formato incorrecto";
+            return "incorrect format";
+
+        }
+
+    }
+
+
+    public static String getJSON (RequestJSON requestJSON)  {
+
+        try
+        {
+            return  GsonFactory.getGson().toJson(requestJSON);
+
+        }
+        catch (Exception e)
+        {
+            return "incorrect format";
 
         }
 

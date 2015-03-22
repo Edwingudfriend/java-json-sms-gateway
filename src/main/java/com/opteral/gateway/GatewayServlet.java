@@ -23,7 +23,22 @@ import java.io.IOException;
 public class GatewayServlet extends HttpServlet{
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        doWork(request,response);
+
+
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+        doWork(request,response);
+
+    }
+
+    private void doWork(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         try
         {
@@ -38,7 +53,7 @@ public class GatewayServlet extends HttpServlet{
                         new SMSDAOMySQL(),
                         new CheckerSMS(new ValidatorImp()));
 
-                response.getWriter().print(requestSMS.process());
+                response.getWriter().print(OutParser.getJSON(requestSMS.process()));
             }
             else
                 throw new GatewayException("Error: A valid JSON request is required");
@@ -47,6 +62,6 @@ public class GatewayServlet extends HttpServlet{
             response.getWriter().print(OutParser.getJSON(new ResponseJSON(e)));
         }
 
-
     }
+
 }

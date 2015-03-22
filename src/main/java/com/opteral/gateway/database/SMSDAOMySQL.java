@@ -1,6 +1,7 @@
 package com.opteral.gateway.database;
 
 import com.opteral.gateway.GatewayException;
+import com.opteral.gateway.model.ACK;
 import com.opteral.gateway.model.SMS;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -200,6 +201,54 @@ public class SMSDAOMySQL extends Database implements SMSDAO {
         {
             closeQuietly(conn, statement, resultSet);
         }
+    }
+
+
+    @Override
+    public void updateSMS_Status(ACK ack) throws GatewayException, SQLException {
+
+        PreparedStatement statement = null;
+
+        try
+        {
+            setConnection();
+            conn.setAutoCommit(false);
+
+
+            String sql;
+
+            if (ack.getIdSMS() != null)
+                sql = "UPDATE sms SET estado = ?, datetime_lastmodified = ? WHERE id = ?";
+            else
+                sql =  "UPDATE sms SET estado = ?, datetime_lastmodified = ? WHERE idSMSC = ?";
+
+
+            statement = conn.prepareStatement(sql);
+
+            statement.setInt(1, ack.getSms_status().getValue());
+            statement.setTimestamp(2, new Timestamp(ack.getAcktimestamp().getTime()));
+
+
+            if (ack.getIdSMS() != null)
+                statement.setLong(3, ack.getIdSMS());
+            else
+                statement.setString(3, ack.getIdSMSC());
+
+            statement.executeUpdate();
+
+            conn.commit();
+
+
+        }
+        catch (Exception e)
+        {
+            throw new GatewayException ("Error: Failed updating sms_status on sms with id "+ ack.getIdSMS() +" and with idSMSC"+ack.getIdSMSC() + " on database");
+        }
+        finally {
+            conn.setAutoCommit(true);
+            closeQuietly(conn, statement, null);
+        }
+
     }
     
 }

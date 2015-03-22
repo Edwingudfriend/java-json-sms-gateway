@@ -26,6 +26,10 @@ public class SMS_Response {
 
     }
 
+    public SMS_Response() {
+
+    }
+
     public boolean isRequest_ok() {
         return request_ok;
     }

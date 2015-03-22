@@ -18,4 +18,20 @@ public class InParser {
 
         return requestJSON;
     }
+
+    public static ResponseJSON getResponseJSON (String gsonString) throws GatewayException {
+
+        try
+        {
+
+            return  GsonFactory.getGson().fromJson(gsonString, ResponseJSON.class);
+
+        }
+        catch (Exception e)
+        {
+            throw new GatewayException("Invalid JSON Response");
+
+        }
+
+    }
 }

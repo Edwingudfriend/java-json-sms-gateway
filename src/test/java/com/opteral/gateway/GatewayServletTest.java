@@ -57,12 +57,6 @@ public class GatewayServletTest {
         assertEquals(response_writer.toString(), "{\"response_code\":\"ERROR_GENERAL\",\"msg\":\"Error: A valid JSON request is required\"}");
     }
 
-    @Test
-    public void testOk() throws Exception {
-        parameters.put("json", "this is not a valid JSON");
-        servlet.doPost(request, response);
-        assertThat(response_writer.toString(),
-                containsString("OK"));
-    }
+
 
 }

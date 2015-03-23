@@ -6,7 +6,7 @@
 
 
     <listener>
-        <listener-class>com.opteral.gateway.Config</listener-class>
+        <listener-class>com.opteral.gateway.GatewayServletListener</listener-class>
     </listener>
 
     <servlet>

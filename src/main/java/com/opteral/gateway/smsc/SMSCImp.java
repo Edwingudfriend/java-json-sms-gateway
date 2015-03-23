@@ -1,8 +1,7 @@
 package com.opteral.gateway.smsc;
 
-import com.opteral.gateway.Config;
+import com.opteral.gateway.GatewayServletListener;
 import com.opteral.gateway.GatewayException;
-import com.opteral.gateway.model.ACK;
 import com.opteral.gateway.model.SMS;
 import org.apache.log4j.Logger;
 import org.jsmpp.InvalidResponseException;
@@ -33,7 +32,7 @@ public class SMSCImp implements SMSC {
 
         try
         {
-            String messageId = Config.getSession().submitShortMessage("CMT", TypeOfNumber.ALPHANUMERIC, NumberingPlanIndicator.UNKNOWN, sms.getSender(), TypeOfNumber.INTERNATIONAL, NumberingPlanIndicator.UNKNOWN, sms.getMsisdn(), new ESMClass(), (byte) 0, (byte) 1, null, null, registeredDelivery, (byte) 0, dataCoding, (byte) 0, msgText);
+            String messageId = GatewayServletListener.getSession().submitShortMessage("CMT", TypeOfNumber.ALPHANUMERIC, NumberingPlanIndicator.UNKNOWN, sms.getSender(), TypeOfNumber.INTERNATIONAL, NumberingPlanIndicator.UNKNOWN, sms.getMsisdn(), new ESMClass(), (byte) 0, (byte) 1, null, null, registeredDelivery, (byte) 0, dataCoding, (byte) 0, msgText);
             sms.setIdSMSC(messageId);
             logger.info("Message submitted, message_id is " + messageId);
 

@@ -1,6 +1,7 @@
 package com.opteral.gateway.validation;
 
 import com.opteral.gateway.Config;
+import com.opteral.gateway.GatewayServletListener;
 import com.opteral.gateway.GatewayException;
 import com.opteral.gateway.json.JSON_SMS;
 
@@ -38,7 +39,7 @@ public class CheckerSMS {
         if (!isValidAck(jsonsms))
             throw new GatewayException("Error: ACK configuration issue  on sms: "+jsonsms.getSubid());
         if (!isValidSubid(jsonsms.getSubid()))
-            throw new GatewayException("Error: subid size must be lower than "+Config.SUBID_MAX_SIZE+ " on sms: "+jsonsms.getSubid());
+            throw new GatewayException("Error: subid size must be lower than "+ Config.SUBID_MAX_SIZE+ " on sms: "+jsonsms.getSubid());
         if (!isValidDateTime(jsonsms.getDatetime()))
             throw new GatewayException("Error:  The scheduled date can not be earlier than the current date, on sms: "+jsonsms.getSubid());
 

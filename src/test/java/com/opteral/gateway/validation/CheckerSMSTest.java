@@ -1,6 +1,7 @@
 package com.opteral.gateway.validation;
 
 import com.opteral.gateway.Config;
+import com.opteral.gateway.GatewayServletListener;
 import com.opteral.gateway.GatewayException;
 import com.opteral.gateway.TestHelper;
 import com.opteral.gateway.json.JSON_SMS;

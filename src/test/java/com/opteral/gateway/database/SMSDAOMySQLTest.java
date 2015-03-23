@@ -1,5 +1,6 @@
 package com.opteral.gateway.database;
 
+import com.opteral.gateway.model.ACK;
 import com.opteral.gateway.model.SMS;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -99,6 +100,28 @@ public class SMSDAOMySQLTest extends AbstractDbUnitTemplateTestCase {
         assertEquals(EntitiesHelper.ACKURL, lista.get(1).getAckurl());
         assertEquals(null, lista.get(0).getDatetimeScheduled());
         assertEquals(EntitiesHelper.DATETIME_SCHEDULED_2014, lista.get(1).getDatetimeScheduled());
+
+
+
+    }
+
+
+    @Test
+    @DataSets(assertDataSet="/dataset/sms-sended.xml", setUpDataSet = "/dataset/sms-scheduled.xml")
+    public void testSMSUpdateStatus() throws Exception {
+
+        SMS sms = newSMS();
+        sms.setId(EntitiesHelper.SMS_ID);
+        sms.setSms_status(SMS.SMS_Status.PROGRAMED);
+
+        ACK ack = new ACK();
+
+
+        ack.setIdSMS(EntitiesHelper.SMS_ID);
+        ack.setSms_status(SMS.SMS_Status.DELIVRD);
+        ack.setAckNow();
+
+        smsDAO.updateSMS_Status(ack);
 
 
 

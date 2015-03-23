@@ -215,9 +215,9 @@ public class SMSDAOMySQL extends Database implements SMSDAO {
             String sql;
 
             if (ack.getIdSMS() != null)
-                sql = "UPDATE sms SET estado = ?, datetime_lastmodified = ? WHERE id = ?";
+                sql = "UPDATE sms SET status = ?, datetime_lastmodified = ? WHERE id = ?";
             else
-                sql =  "UPDATE sms SET estado = ?, datetime_lastmodified = ? WHERE idSMSC = ?";
+                sql =  "UPDATE sms SET status = ?, datetime_lastmodified = ? WHERE idSMSC = ?";
 
 
             statement = conn.prepareStatement(sql);

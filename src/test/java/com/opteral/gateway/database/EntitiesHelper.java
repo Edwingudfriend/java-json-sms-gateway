@@ -11,7 +11,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class EntitiesHelper {
 
-    public static final int SMS_ID = 4654;
+    public static final long SMS_ID = 4654;
     public static final int USER_ID = 456;
     public static final String USER_NAME = "amalio";
     public static final String SENDER = "sender";

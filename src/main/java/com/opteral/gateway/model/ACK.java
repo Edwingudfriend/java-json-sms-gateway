@@ -38,7 +38,9 @@ public class ACK {
         this.ackmisdn = ackmisdn;
     }
 
-
+    public void setIdSMS(Long idSMS) {
+        this.idSMS = idSMS;
+    }
 
     public void setIdSMS(String s) {
 

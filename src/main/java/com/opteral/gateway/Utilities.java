@@ -7,6 +7,7 @@ package com.opteral.gateway;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
+import javax.ws.rs.client.ClientBuilder;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -44,34 +45,9 @@ public class Utilities {
         return hexString.toString();
     }
 
-    public static String sendGet(String url) throws GatewayException {
+    public static void sendGet(String url)  {
 
-        try {
-
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-
-            con.setRequestMethod("GET");
-            con.setRequestProperty("User-Agent", "SMS Gateway");
-
-            int responseCode = con.getResponseCode();
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            return response.toString();
-        } catch (Exception e) {
-            throw new GatewayException("Error: Failed sending ACK on "+ url);
-        }
-
+        ClientBuilder.newClient().target(url).request().async().get();
 
     }
 

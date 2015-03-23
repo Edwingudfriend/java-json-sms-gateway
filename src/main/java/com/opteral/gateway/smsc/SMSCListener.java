@@ -3,6 +3,7 @@ package com.opteral.gateway.smsc;
 import com.opteral.gateway.ACKSender;
 import com.opteral.gateway.GatewayException;
 import com.opteral.gateway.Utilities;
+import com.opteral.gateway.database.SMSDAO;
 import com.opteral.gateway.database.SMSDAOMySQL;
 import com.opteral.gateway.model.ACK;
 import com.opteral.gateway.model.SMS;
@@ -15,6 +16,8 @@ import org.jsmpp.session.Session;
 import org.jsmpp.util.InvalidDeliveryReceiptException;
 
 import java.sql.SQLException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 
 public class SMSCListener implements MessageReceiverListener {
 
@@ -33,19 +36,32 @@ public class SMSCListener implements MessageReceiverListener {
                 long id = Long.parseLong(delReceipt.getId());
                 String messageId = Long.toString(id, 16);
 
-                ACK ack = new ACK();
+                final ACK ack = new ACK();
 
                 ack.setIdSMSC(messageId);
                 ack.setSms_status(SMS.SMS_Status.DELIVRD);
                 ack.setAckNow();
 
 
-                SMSDAOMySQL smsdaoMySQL = new SMSDAOMySQL();
+                final SMSDAOMySQL smsdaoMySQL = new SMSDAOMySQL();
 
-                smsdaoMySQL.updateSMS_Status(ack);
+                processACK(smsdaoMySQL, ack);
 
-                ACKSender.sendACK(ack,smsdaoMySQL);
-
+                Runnable r = new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        try {
+                            processACK(smsdaoMySQL,ack);
+                        } catch (SQLException e) {
+                            logger.error("Failed sending ACK", e);
+                        } catch (GatewayException e) {
+                            logger.error("Failed sending ACK", e);
+                        }
+                    }
+                };
+                new Thread(r).start();
 
                 logger.info("Recived confirmation delivery: '" + messageId + "' : " + delReceipt +delReceipt.getDelivered());
 
@@ -80,6 +96,17 @@ public class SMSCListener implements MessageReceiverListener {
     public DataSmResult onAcceptDataSm(DataSm dataSm, Session session) throws ProcessRequestException {
         return null;
     }
+
+    private void processACK(SMSDAO smsdao, ACK ack) throws SQLException, GatewayException {
+
+        smsdao.updateSMS_Status(ack);
+
+        ACKSender.sendACK(ack,smsdao);
+    }
+
+
+
+
 
 
 }

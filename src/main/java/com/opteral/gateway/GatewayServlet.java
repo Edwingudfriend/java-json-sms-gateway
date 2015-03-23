@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 @WebServlet(
         name = "com.opteral.gateway.servlet.GatewayServlet",
@@ -39,6 +41,20 @@ public class GatewayServlet extends HttpServlet{
     }
 
     private void doWork(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        PrintWriter out = null;
+        response.setCharacterEncoding("UTF-8");
+
+        try
+        {
+            request.setCharacterEncoding("UTF-8");
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+
+            return;
+        }
 
         try
         {

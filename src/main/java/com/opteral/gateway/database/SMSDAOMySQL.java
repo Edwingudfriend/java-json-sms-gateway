@@ -247,5 +247,48 @@ public class SMSDAOMySQL extends Database implements SMSDAO {
         }
 
     }
-    
+
+    @Override
+    public SMS getSMS(long id) throws GatewayException {
+
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        SMS sms = new SMS();
+
+        try {
+
+            setConnection();
+
+            String sql = "SELECT * FROM sms WHERE id = ?";
+
+            statement = conn.prepareStatement(sql);
+
+            statement.setLong(1, id);
+
+            resultSet = statement.executeQuery();
+
+            if (!resultSet.isBeforeFirst() ) {
+
+                return null;
+            }
+
+
+            resultSet.next();
+
+            sms = fillSMS(resultSet);
+
+            return sms;
+
+
+        }
+        catch (Exception e) {
+            throw new GatewayException ("Error: Failed recovering sms");
+        }
+        finally
+        {
+            closeQuietly(conn, statement, resultSet);
+        }
+    }
+
 }

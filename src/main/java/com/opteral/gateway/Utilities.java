@@ -1,5 +1,9 @@
 package com.opteral.gateway;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.MessageDigest;
 
 public class Utilities {
@@ -28,6 +32,37 @@ public class Utilities {
             hexString.append(hex);
         }
         return hexString.toString();
+    }
+
+    public static String sendGet(String url) throws GatewayException {
+
+        try {
+
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+
+            con.setRequestMethod("GET");
+            con.setRequestProperty("User-Agent", "SMS Gateway");
+
+            int responseCode = con.getResponseCode();
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            return response.toString();
+        } catch (Exception e) {
+            throw new GatewayException("Error: Failed sending ACK on "+ url);
+        }
+
+
     }
 
 }

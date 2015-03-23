@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 
+import static com.opteral.gateway.database.EntitiesHelper.SMS_ID;
 import static com.opteral.gateway.database.EntitiesHelper.newSMS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -124,6 +125,27 @@ public class SMSDAOMySQLTest extends AbstractDbUnitTemplateTestCase {
         smsDAO.updateSMS_Status(ack);
 
 
+
+    }
+
+
+    @Test
+    @DataSets(setUpDataSet="/dataset/sms-scheduled.xml")
+    public void testGetSMS() throws Exception {
+
+        SMS sms = smsDAO.getSMS(EntitiesHelper.SMS_ID);
+
+        assertNotNull(sms);
+        assertEquals(EntitiesHelper.SMS_ID, sms.getId());
+        assertEquals(EntitiesHelper.USER_ID, sms.getUser_id());
+        assertEquals(EntitiesHelper.SENDER, sms.getSender());
+        assertEquals(EntitiesHelper.MSISDN, sms.getMsisdn());
+        assertEquals(EntitiesHelper.TEXT, sms.getText());
+        assertEquals(EntitiesHelper.SUBID, sms.getSubid());
+        assertEquals(EntitiesHelper.ACKURL, sms.getAckurl());
+        assertEquals(EntitiesHelper.DATETIME_SCHEDULED_2015, sms.getDatetimeScheduled());
+        assertEquals(SMS.SMS_Status.PROGRAMED, sms.getSms_status());
+        assertEquals(false, sms.isTest());
 
     }
 

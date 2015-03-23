@@ -21,6 +21,7 @@ public class SMS {
     private String ackurl;
     private SMS_Status sms_status;
     private Timestamp datetimeScheduled;
+    private Timestamp datetimeLastModified;
     private boolean test;
 
 
@@ -103,6 +104,14 @@ public class SMS {
 
     public void setDatetimeScheduled(Timestamp datetimeScheduled) {
         this.datetimeScheduled = datetimeScheduled;
+    }
+
+    public Timestamp getDatetimeLastModified() {
+        return datetimeLastModified;
+    }
+
+    public void setDatetimeLastModified(Timestamp datetimeLastModified) {
+        this.datetimeLastModified = datetimeLastModified;
     }
 
     public boolean isTest() {

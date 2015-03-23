@@ -13,5 +13,6 @@ public interface SMSDAO {
     public void persist(SMS sms) throws GatewayException, SQLException;
     public List<SMS> getSMSForSend(Date aFecha) throws GatewayException;
     public void updateSMS_Status(ACK ack) throws GatewayException, SQLException;
+    public SMS getSMS(long id) throws GatewayException;
 
 }

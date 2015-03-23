@@ -12,6 +12,7 @@ public class JSON_SMS {
     private String ack_url;
     private Date datetime;
     private boolean test;
+    private boolean forDelete;
 
     public int getId() {
         return id;
@@ -75,5 +76,13 @@ public class JSON_SMS {
 
     public void setTest(boolean test) {
         this.test = test;
+    }
+
+    public boolean isForDelete() {
+        return forDelete;
+    }
+
+    public void setForDelete(boolean forDelete) {
+        this.forDelete = forDelete;
     }
 }

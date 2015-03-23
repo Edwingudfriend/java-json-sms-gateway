@@ -36,7 +36,8 @@
       "sender": "sender_str",
       "text": "the text of SMS with an ñ",
       "datetime": null,
-      "test": true
+      "test": true,
+      "forDelete": true
     }
   ]
 }

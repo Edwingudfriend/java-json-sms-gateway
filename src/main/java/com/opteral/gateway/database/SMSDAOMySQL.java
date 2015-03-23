@@ -3,7 +3,6 @@ package com.opteral.gateway.database;
 import com.opteral.gateway.GatewayException;
 import com.opteral.gateway.model.ACK;
 import com.opteral.gateway.model.SMS;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,18 +17,19 @@ public class SMSDAOMySQL extends Database implements SMSDAO {
     @Override
     public void persist(SMS sms) throws GatewayException, SQLException {
 
-
-        if (sms.getId() > 0)
-            actualizar(sms);
+        if (sms.isForDelete())
+            delete(sms);
+        else if (sms.getId() > 0)
+            update(sms);
         else
-            guardar(sms);
+            save(sms);
 
 
     }
 
 
 
-    private void guardar(SMS sms) throws GatewayException, SQLException {
+    private void save(SMS sms) throws GatewayException, SQLException {
 
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -96,7 +96,7 @@ public class SMSDAOMySQL extends Database implements SMSDAO {
         }
     }
 
-    private void actualizar(SMS sms) throws SQLException, GatewayException {
+    private void update(SMS sms) throws SQLException, GatewayException {
 
         PreparedStatement statement = null;
         try
@@ -144,6 +144,44 @@ public class SMSDAOMySQL extends Database implements SMSDAO {
         }
         catch (Exception e) {
             throw new GatewayException("Error: Failed updating SMS "+ sms.getId() +" on database");
+        }
+        finally {
+            conn.setAutoCommit(true);
+            closeQuietly(conn, statement, null);
+        }
+    }
+
+    private void delete(SMS sms) throws SQLException, GatewayException {
+
+        PreparedStatement statement = null;
+        try
+        {
+
+            setConnection();
+            conn.setAutoCommit(false);
+
+
+            final String sql = "DELETE FROM sms WHERE id = ? AND users_id = ?";
+
+
+            statement = conn.prepareStatement(sql);
+
+            statement.setLong(1, sms.getId());
+            statement.setInt(2, sms.getUser_id());
+
+
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new GatewayException("");
+            }
+
+            conn.commit();
+
+            sms.setSms_status(SMS.SMS_Status.DELETED);
+
+        }
+        catch (Exception e) {
+            throw new GatewayException("Faild deleting SMS witd id :" +sms.getId()+" for this user");
         }
         finally {
             conn.setAutoCommit(true);

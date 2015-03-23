@@ -1,1 +1,1 @@
-* Add delete SMS feature
+* ACK send must be async

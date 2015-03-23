@@ -27,11 +27,8 @@ public class CheckerSMS {
 
     public void check(JSON_SMS jsonsms) throws GatewayException {
 
-
-        //TODO agrupar esto hace que el mensaje sea muy genérico
         if (!isValidTexto(jsonsms))
             throw new GatewayException("Error: Valid text is needed on sms: "+jsonsms.getSubid());
-        //TODO agrupar esto hace que el mensaje sea muy genérico
         if (!isValidSender(jsonsms.getSender()))
             throw new GatewayException("Error: Valid sender is needed  on sms: "+jsonsms.getSubid());
         if (!validator.isMsisdn(jsonsms.getMsisdn()))

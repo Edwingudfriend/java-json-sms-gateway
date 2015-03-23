@@ -79,6 +79,11 @@ public class InParserTest {
         assertFalse(listaJSONSMS.get(2).isTest());
         assertTrue(listaJSONSMS.get(3).isTest());
 
+        assertFalse(listaJSONSMS.get(0).isForDelete());
+        assertFalse(listaJSONSMS.get(1).isForDelete());
+        assertFalse(listaJSONSMS.get(2).isForDelete());
+        assertTrue(listaJSONSMS.get(3).isForDelete());
+
 
     }
 

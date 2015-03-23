@@ -1,6 +1,8 @@
 package com.opteral.gateway.smsc;
 
+import com.opteral.gateway.ACKSender;
 import com.opteral.gateway.GatewayException;
+import com.opteral.gateway.Utilities;
 import com.opteral.gateway.database.SMSDAOMySQL;
 import com.opteral.gateway.model.ACK;
 import com.opteral.gateway.model.SMS;
@@ -34,7 +36,6 @@ public class SMSCListener implements MessageReceiverListener {
                 ACK ack = new ACK();
 
                 ack.setIdSMSC(messageId);
-                //TODO condicion de estado
                 ack.setSms_status(SMS.SMS_Status.DELIVRD);
                 ack.setAckNow();
 
@@ -43,7 +44,7 @@ public class SMSCListener implements MessageReceiverListener {
 
                 smsdaoMySQL.updateSMS_Status(ack);
 
-                //TODO enviar ACK si es necesario
+                ACKSender.sendACK(ack,smsdaoMySQL);
 
 
                 logger.info("Recived confirmation delivery: '" + messageId + "' : " + delReceipt +delReceipt.getDelivered());

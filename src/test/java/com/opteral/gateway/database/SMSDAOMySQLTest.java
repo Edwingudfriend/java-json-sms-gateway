@@ -149,4 +149,18 @@ public class SMSDAOMySQLTest extends AbstractDbUnitTemplateTestCase {
 
     }
 
+
+    @Test
+    @DataSets(assertDataSet="/dataset/empty.xml", setUpDataSet = "/dataset/sms-scheduled.xml")
+    public void testForDelete() throws Exception {
+
+        SMS sms = newSMS();
+        sms.setId(EntitiesHelper.SMS_ID);
+        sms.setForDelete(true);
+
+        smsDAO.persist(sms);
+
+        assertEquals(SMS.SMS_Status.DELETED, sms.getSms_status());
+    }
+
 }

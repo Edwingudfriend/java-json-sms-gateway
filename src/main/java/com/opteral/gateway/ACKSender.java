@@ -12,7 +12,7 @@ public class ACKSender {
 
     private static final Logger logger = Logger.getLogger(ACKSender.class);
 
-    private static void enviaRespuesta(ACK ack, SMSDAO smsdao) throws GatewayException {
+    public static void sendACK(ACK ack, SMSDAO smsdao) throws GatewayException {
 
         SMS sms = smsdao.getSMS(ack.getIdSMS());
 

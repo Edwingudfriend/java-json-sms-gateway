@@ -84,7 +84,6 @@ public class RequestSMS {
 
             }
             catch (Exception e) {
-                //TODO sacría la posibilidad de incluir el estado SMS con una consulta adicional.
                 sms_responses.add(new SMS_Response(jsonSMS, false));
 
             }

@@ -11,7 +11,8 @@ jjsg - Java JSON SMS Gateway
 ## Installation
 
 1. Copy supplied gateway.properties in your /etc/jjsg/ folder
-2. Deploy jjsg.war in your Servlet container
+2. Edit gateway.properties setting the user name, password and other correct values
+3. Deploy jjsg.war in your Servlet container
 
 ## Usage
 
@@ -86,9 +87,6 @@ All requests must include a "json" field.
   "sms_request": [
     {
       "id": "subid1",
-      "msisdn": "34646974525",
-      "sender": "sender_str",
-      "text": "message text",
       "forDelete": true
     }
   ]

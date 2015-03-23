@@ -29,9 +29,9 @@ public class CheckerSMS {
 
         if (!isValidTexto(jsonsms))
             throw new GatewayException("Error: Valid text is needed on sms: "+jsonsms.getSubid());
-        if (!isValidSender(jsonsms.getSender()))
+        if (!isValidSender(jsonsms))
             throw new GatewayException("Error: Valid sender is needed  on sms: "+jsonsms.getSubid());
-        if (!validator.isMsisdn(jsonsms.getMsisdn()))
+        if (!jsonsms.isForDelete() && !validator.isMsisdn(jsonsms.getMsisdn()))
             throw new GatewayException("Error: Valid msisdn is needed  on sms: "+jsonsms.getSubid());
         if (!isValidAck(jsonsms))
             throw new GatewayException("Error: ACK configuration issue  on sms: "+jsonsms.getSubid());
@@ -72,6 +72,9 @@ public class CheckerSMS {
 
     private boolean isValidTexto(JSON_SMS jsonsms)
     {
+        if (jsonsms.isForDelete())
+            return true;
+
         String texto = jsonsms.getText();
 
         return !(texto == null || texto.isEmpty() || texto.length() > Config.MAX_SMS_SIZE);
@@ -79,12 +82,14 @@ public class CheckerSMS {
 
     }
 
-    private boolean isValidSender(String sender)
+    private boolean isValidSender(JSON_SMS json_sms)
     {
-        if (sender == null)
+        if (json_sms.isForDelete())
+            return true;
+        if (json_sms.getSender() == null)
             return false;
 
-        return (sender.length() > 0 && sender.length() < Config.SENDER_MAX_SIZE);
+        return (json_sms.getSender().length() > 0 && json_sms.getSender().length() < Config.SENDER_MAX_SIZE);
 
     }
 

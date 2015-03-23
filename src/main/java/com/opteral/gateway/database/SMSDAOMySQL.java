@@ -58,15 +58,12 @@ public class SMSDAOMySQL extends Database implements SMSDAO {
             statement.setInt(6, sms.getSms_status().getValue());
             statement.setString(7,sms.getAckurl());
             statement.setTimestamp(8, timestampNow);
+            statement.setTimestamp(9, timestampNow);
 
             if (sms.getDatetimeScheduled() != null)
-                statement.setTimestamp(9,new Timestamp(sms.getDatetimeScheduled().getTime()));
+                statement.setTimestamp(10,new Timestamp(sms.getDatetimeScheduled().getTime()));
             else
-                statement.setNull(9, Types.TIMESTAMP);
-
-
-            statement.setTimestamp(10, timestampNow);
-
+                statement.setNull(10, Types.TIMESTAMP);
 
 
             int affectedRows = statement.executeUpdate();

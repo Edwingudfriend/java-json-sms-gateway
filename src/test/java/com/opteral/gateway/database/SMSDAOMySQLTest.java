@@ -38,6 +38,7 @@ public class SMSDAOMySQLTest extends AbstractDbUnitTemplateTestCase {
         smsDAO.persist(sms);
 
         assertTrue(sms.getId() > 0);
+        assertEquals(null, sms.getDatetimeScheduled());
 
     }
 

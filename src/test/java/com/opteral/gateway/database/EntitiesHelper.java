@@ -1,6 +1,7 @@
 package com.opteral.gateway.database;
 
 import com.opteral.gateway.TestHelper;
+import com.opteral.gateway.Utilities;
 import com.opteral.gateway.model.SMS;
 import com.opteral.gateway.model.User;
 
@@ -31,7 +32,7 @@ public class EntitiesHelper {
 
     static void createTestTables(Connection connection) throws SQLException {
 
-        String sql = TestHelper.getFromFile("testTables.sql");
+        String sql = Utilities.getFromFile("testTables.sql");
         Statement stmt = connection.createStatement();
         try {
             stmt.execute(sql);

@@ -11,19 +11,7 @@ public class TestHelper {
     public static int EXCEPTION_EXPECTED = 1;
     public static int NORMAL = 0;
 
-    public static String getFromFile(String fileName)
-    {
-        String result = "";
 
-        ClassLoader classLoader = TestHelper.class.getClassLoader();
-        try {
-            result = IOUtils.toString(classLoader.getResourceAsStream(fileName), "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return result;
-    }
 
 
     public static String genString(int num) {

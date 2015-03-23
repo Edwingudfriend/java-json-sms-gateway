@@ -4,6 +4,7 @@ import com.opteral.gateway.database.SMSDAOMySQL;
 import com.opteral.gateway.smsc.SMSCImp;
 import com.opteral.gateway.smsc.SMSCListener;
 import com.opteral.gateway.smsc.SMSCSessionListener;
+import javafx.application.Application;
 import org.apache.log4j.Logger;
 import org.jsmpp.bean.BindType;
 import org.jsmpp.bean.NumberingPlanIndicator;
@@ -35,7 +36,7 @@ public class GatewayServletListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
-        ServletContext sc = servletContextEvent.getServletContext();
+        loadConfig();
 
         SMSDAOMySQL smsdao = new SMSDAOMySQL();
         SMSCImp smscImp= new SMSCImp();
@@ -60,6 +61,17 @@ public class GatewayServletListener implements ServletContextListener {
         logger.info("|||||||||||||| GATEWAY STOPPED||||||||||||||");
     }
 
+    private void loadConfig()
+    {
+        try {
+            Utilities.getConfig(false);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Failed loading configuration file");
+        }
+    }
+
     private void setupSMPP()
     {
 
@@ -73,9 +85,9 @@ public class GatewayServletListener implements ServletContextListener {
 
             session.addSessionStateListener(new SMSCSessionListener());
 
-            session.connectAndBind(Config.SMSC_IP, Config.SMS_PORT, new BindParameter(BindType.BIND_TRX, Config.SMSC_USERNAME, Config.SMSC_PASSWORD, "cp", TypeOfNumber.UNKNOWN, NumberingPlanIndicator.UNKNOWN, null));
+            session.connectAndBind(Config.SMSC_IP, Config.SMSC_PORT, new BindParameter(BindType.BIND_TRX, Config.SMSC_USERNAME, Config.SMSC_PASSWORD, "cp", TypeOfNumber.UNKNOWN, NumberingPlanIndicator.UNKNOWN, null));
 
-            iniciado.compareAndSet(false,true);
+            iniciado.compareAndSet(false, true);
 
         }
         catch (IOException e)

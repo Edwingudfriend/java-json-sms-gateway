@@ -43,7 +43,6 @@
             <groupId>org.apache.directory.studio</groupId>
             <artifactId>org.apache.commons.io</artifactId>
             <version>2.4</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>

@@ -1,4 +1,4 @@
-jjsg - Java JSON SMS Gateway
+Java JSON SMS Gateway
 =====================
 
 ## Features

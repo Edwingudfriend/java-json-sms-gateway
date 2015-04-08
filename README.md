@@ -1,6 +1,6 @@
 ~~Java JSON SMS Gateway~~
 =====================
-This project is obsolete and discontinued, it's strongly recommended go [sprong-json-sms-gateway](https://github.com/amalio/spring-json-sms-gateway), based on Spring Framework, that is far better and coolest.
+This project is obsolete and discontinued, it's strongly recommended go [spring-json-sms-gateway](https://github.com/amalio/spring-json-sms-gateway), based on Spring Framework, that is far better and coolest.
 
 ## Features
 - [x] Ready for send SMS via SMSC with SMPP Protocol
